@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:weather_riverpod/providers/home_providers/forecast_provider.dart';
+import 'package:weather_riverpod/core/enums/theme_enum.dart';
+import 'package:weather_riverpod/core/themes/providers/theme_provider.dart';
 import 'package:weather_riverpod/screens/home/widgets/city_text_widget.dart';
+
+import 'providers/forecast_provider.dart';
 
 class ScreenHome extends ConsumerWidget {
   const ScreenHome({super.key});
@@ -10,6 +13,7 @@ class ScreenHome extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final size = MediaQuery.of(context).size;
     final isForecastVisible = ref.watch(isForecastCardVisibleProvider);
+    final currentTheme = ref.watch(themeProvider);
     return Scaffold(
       body: Stack(
         children: [
@@ -50,14 +54,29 @@ class ScreenHome extends ConsumerWidget {
                           CityTextWidget(text: "25.08.2.2022"),
                         ],
                       ),
-                      IconButton.filled(
-                        padding: const EdgeInsets.all(17),
-                        iconSize: 20,
-                        onPressed: () {
-                          //*Navigating to search page
-                          Navigator.pushNamed(context, '/search');
-                        },
-                        icon: const Icon(Icons.search),
+                      Row(
+                        children: [
+                          IconButton(
+                            onPressed: () {
+                              ref.read(themeProvider.notifier).switchTheme();
+                            },
+                            icon: Icon(
+                              currentTheme == Themes.light
+                                  ? Icons.dark_mode_outlined
+                                  : Icons.light_mode_outlined,
+                            ),
+                          ),
+                          const SizedBox(width: 10),
+                          IconButton.filled(
+                            padding: const EdgeInsets.all(17),
+                            iconSize: 20,
+                            onPressed: () {
+                              //*Navigating to search page
+                              Navigator.pushNamed(context, '/search');
+                            },
+                            icon: const Icon(Icons.search),
+                          ),
+                        ],
                       ),
                     ],
                   ),
