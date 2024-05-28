@@ -1,14 +1,16 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:weather_riverpod/providers/home_providers/forecast_provider.dart';
 import 'package:weather_riverpod/screens/home/widgets/city_text_widget.dart';
 
-class ScreenHome extends StatelessWidget {
+class ScreenHome extends ConsumerWidget {
   const ScreenHome({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final md = MediaQuery.of(context);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isForecastVisible = ref.watch(isForecastCardVisibleProvider);
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -91,8 +93,17 @@ class ScreenHome extends StatelessWidget {
                           ),
                         ),
                         IconButton(
-                            onPressed: () {},
-                            icon: const Icon(Icons.keyboard_arrow_down))
+                          onPressed: () {
+                            ref
+                                .read(isForecastCardVisibleProvider.notifier)
+                                .changeValue();
+                          },
+                          icon: Icon(
+                            isForecastVisible
+                                ? Icons.keyboard_arrow_up
+                                : Icons.keyboard_arrow_down,
+                          ),
+                        ),
                       ],
                     ),
                   ),
