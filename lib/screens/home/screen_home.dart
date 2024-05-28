@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:weather_riverpod/providers/home_providers/forecast_provider.dart';
 import 'package:weather_riverpod/screens/home/widgets/city_text_widget.dart';
@@ -16,9 +14,9 @@ class ScreenHome extends ConsumerWidget {
       body: Stack(
         children: [
           Container(
-            decoration: const BoxDecoration(
-              color: Color.fromARGB(255, 242, 247, 252),
-              borderRadius: BorderRadius.only(
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.secondary,
+              borderRadius: const BorderRadius.only(
                 bottomRight: Radius.elliptical(600, 350),
               ),
             ),
@@ -27,9 +25,9 @@ class ScreenHome extends ConsumerWidget {
           Align(
             alignment: Alignment.bottomRight,
             child: Container(
-              decoration: const BoxDecoration(
-                color: Color.fromARGB(255, 242, 247, 252),
-                borderRadius: BorderRadius.only(
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.secondary,
+                borderRadius: const BorderRadius.only(
                   topLeft: Radius.elliptical(400, 200),
                 ),
               ),
@@ -49,10 +47,11 @@ class ScreenHome extends ConsumerWidget {
                         children: [
                           CityTextWidget(text: 'Lille, France'),
                           SizedBox(height: 5),
-                          CityTextWidget(text: "29.08.2.2022"),
+                          CityTextWidget(text: "25.08.2.2022"),
                         ],
                       ),
                       IconButton.filled(
+                        padding: const EdgeInsets.all(17),
                         iconSize: 20,
                         onPressed: () {},
                         icon: const Icon(Icons.search),
@@ -79,7 +78,6 @@ class ScreenHome extends ConsumerWidget {
                         ),
                       ),
                       Card.filled(
-                        color: Colors.white,
                         margin: const EdgeInsets.symmetric(horizontal: 15),
                         child: Column(
                           children: [

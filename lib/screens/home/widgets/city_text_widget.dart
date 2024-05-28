@@ -11,7 +11,7 @@ class CityTextWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 18),
+      style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 19),
     );
   }
 }
