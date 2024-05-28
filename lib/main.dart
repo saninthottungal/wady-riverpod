@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_riverpod/core/themes/theme.dart';
 import 'package:weather_riverpod/screens/home/screen_home.dart';
 
 void main() {
@@ -13,10 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      theme: WeatherThemes.lightTheme,
       routes: {
         '/': (context) => const ScreenHome(),
       },

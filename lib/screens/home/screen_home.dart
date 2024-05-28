@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/widgets.dart';
 import 'package:weather_riverpod/screens/home/widgets/city_text_widget.dart';
 
 class ScreenHome extends StatelessWidget {
@@ -33,42 +35,64 @@ class ScreenHome extends StatelessWidget {
               ),
               Column(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Image.network(
-                        """https://thumbs.dreamstime.com/z/
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.network(
+                          """https://thumbs.dreamstime.com/z/
                     smiling-sun-illustration-character-34434947.jpg?ct=jpeg""",
-                        height: 120,
-                      ),
-                      const Text(
-                        "24°C",
-                        style: TextStyle(fontSize: 55),
-                      ),
-                    ],
+                          height: 120,
+                        ),
+                        const SizedBox(width: 10),
+                        Text("24°C",
+                            style: Theme.of(context).textTheme.displayLarge),
+                      ],
+                    ),
                   ),
-                  Container(
-                    height: 100,
-                    width: md.size.width * 0.9,
-                    color: Colors.black12,
-                    margin: const EdgeInsets.all(10),
-                    child: const Column(
+                  Card(
+                    margin: const EdgeInsets.symmetric(horizontal: 15),
+                    child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text("Humidity"),
-                            Text("223"),
-                          ],
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 25, vertical: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "Humidity",
+                                style: Theme.of(context).textTheme.titleMedium,
+                              ),
+                              Text(
+                                "223",
+                                style: Theme.of(context).textTheme.titleMedium,
+                              ),
+                            ],
+                          ),
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text("wind"),
-                            Text("445"),
-                          ],
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 25, vertical: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "wind",
+                                style: Theme.of(context).textTheme.titleMedium,
+                              ),
+                              Text(
+                                "NE - 60km/h",
+                                style: Theme.of(context).textTheme.titleMedium,
+                              ),
+                            ],
+                          ),
                         ),
+                        IconButton(
+                            onPressed: () {},
+                            icon: const Icon(Icons.keyboard_arrow_down))
                       ],
                     ),
                   ),
