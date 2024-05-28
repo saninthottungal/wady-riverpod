@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:weather_riverpod/core/common/providers/shared_preferences_provider.dart';
+import 'package:weather_riverpod/core/constants.dart';
 import 'package:weather_riverpod/core/enums/theme_enum.dart';
 import 'package:weather_riverpod/core/themes/providers/theme_provider.dart';
 import 'package:weather_riverpod/screens/home/widgets/city_text_widget.dart';
@@ -57,8 +59,15 @@ class ScreenHome extends ConsumerWidget {
                       Row(
                         children: [
                           IconButton(
-                            onPressed: () {
+                            onPressed: () async {
                               ref.read(themeProvider.notifier).switchTheme();
+                              final instance = await ref
+                                  .read(sharedPreferencesProvider.future);
+                              final tempCurrentTheme = ref.read(themeProvider);
+                              instance.setBool(
+                                themeKey,
+                                tempCurrentTheme == Themes.light ? true : false,
+                              );
                             },
                             icon: Icon(
                               currentTheme == Themes.light
