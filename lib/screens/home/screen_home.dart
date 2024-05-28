@@ -53,7 +53,10 @@ class ScreenHome extends ConsumerWidget {
                       IconButton.filled(
                         padding: const EdgeInsets.all(17),
                         iconSize: 20,
-                        onPressed: () {},
+                        onPressed: () {
+                          //*Navigating to search page
+                          Navigator.pushNamed(context, '/search');
+                        },
                         icon: const Icon(Icons.search),
                       ),
                     ],
