@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:weather_riverpod/core/common/providers/shared_preferences_provider.dart';
-import 'package:weather_riverpod/core/constants.dart';
-import 'package:weather_riverpod/core/enums/theme_enum.dart';
-import 'package:weather_riverpod/core/themes/providers/theme_provider.dart';
+import 'package:weather_riverpod/screens/home/widgets/bottom_cover_container.dart';
 import 'package:weather_riverpod/screens/home/widgets/city_text_widget.dart';
+import 'package:weather_riverpod/screens/home/widgets/expand_button_widget.dart';
+import 'package:weather_riverpod/screens/home/widgets/forecast_listview_widget.dart';
+import 'package:weather_riverpod/screens/home/widgets/theme_toggle_widget.dart';
+import 'package:weather_riverpod/screens/home/widgets/top_cover_container.dart';
+import 'package:weather_riverpod/screens/home/widgets/weather_degree_widget.dart';
+import 'package:weather_riverpod/screens/home/widgets/wind_humidity_widget.dart';
 
 import 'providers/forecast_provider.dart';
 
@@ -13,33 +16,13 @@ class ScreenHome extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final size = MediaQuery.of(context).size;
     final isForecastVisible = ref.watch(isForecastCardVisibleProvider);
-    final currentTheme = ref.watch(themeProvider);
+
     return Scaffold(
       body: Stack(
         children: [
-          Container(
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.secondary,
-              borderRadius: const BorderRadius.only(
-                bottomRight: Radius.elliptical(600, 350),
-              ),
-            ),
-            height: size.height * 0.4,
-          ),
-          Align(
-            alignment: Alignment.bottomRight,
-            child: Container(
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.secondary,
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.elliptical(400, 200),
-                ),
-              ),
-              height: isForecastVisible ? size.height : size.height * 0.5,
-            ),
-          ),
+          const TopCoverContainer(),
+          const BottomCoverContainer(),
           SafeArea(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
@@ -58,23 +41,7 @@ class ScreenHome extends ConsumerWidget {
                       ),
                       Row(
                         children: [
-                          IconButton(
-                            onPressed: () async {
-                              ref.read(themeProvider.notifier).switchTheme();
-                              final instance = await ref
-                                  .read(sharedPreferencesProvider.future);
-                              final tempCurrentTheme = ref.read(themeProvider);
-                              instance.setBool(
-                                themeKey,
-                                tempCurrentTheme == Themes.light ? true : false,
-                              );
-                            },
-                            icon: Icon(
-                              currentTheme == Themes.light
-                                  ? Icons.dark_mode_outlined
-                                  : Icons.light_mode_outlined,
-                            ),
-                          ),
+                          const ThemeToggleWidget(),
                           const SizedBox(width: 10),
                           IconButton.filled(
                             padding: const EdgeInsets.all(17),
@@ -91,104 +58,20 @@ class ScreenHome extends ConsumerWidget {
                   ),
                   Column(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 20),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.network(
-                              """https://thumbs.dreamstime.com/z/
-                        smiling-sun-illustration-character-34434947.jpg?ct=jpeg""",
-                              height: 120,
-                            ),
-                            const SizedBox(width: 10),
-                            Text("24°C",
-                                style:
-                                    Theme.of(context).textTheme.displayLarge),
-                          ],
-                        ),
-                      ),
+                      const WeatherDegreeWidget(),
                       Card.filled(
                         margin: const EdgeInsets.symmetric(horizontal: 15),
                         child: Column(
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 30, vertical: 20),
-                              child: Column(
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        "Humidity",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .titleMedium,
-                                      ),
-                                      Text(
-                                        "223%",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .titleMedium,
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 15),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        "wind",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .titleMedium,
-                                      ),
-                                      Text(
-                                        "NE - 60km/h",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .titleMedium,
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
+                            const WindHumidityWidget(),
                             if (isForecastVisible)
                               const Divider(
                                 indent: 15,
                                 endIndent: 15,
                               ),
                             if (isForecastVisible)
-                              LimitedBox(
-                                maxHeight: size.height * 0.35,
-                                child: ListView.builder(
-                                  itemBuilder: (context, index) {
-                                    return const ListTile(
-                                      leading: Icon(Icons.sunny),
-                                      title: Text("nagaram"),
-                                      trailing: Text("30"),
-                                    );
-                                  },
-                                  itemCount: 5,
-                                ),
-                              ),
-                            IconButton(
-                              onPressed: () {
-                                ref
-                                    .read(
-                                        isForecastCardVisibleProvider.notifier)
-                                    .changeValue();
-                              },
-                              icon: Icon(
-                                isForecastVisible
-                                    ? Icons.keyboard_arrow_up
-                                    : Icons.keyboard_arrow_down,
-                              ),
-                            ),
+                              const ForecastListviewWidget(),
+                            const ExpandButtonWidget(),
                           ],
                         ),
                       ),
