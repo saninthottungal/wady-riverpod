@@ -22,7 +22,8 @@ class WeatherThemes {
           color: Color.fromARGB(255, 47, 47, 100),
         ),
         titleLarge: TextStyle(
-          color: Color.fromARGB(255, 47, 47, 47),
+          color: Color.fromARGB(255, 100, 100, 100),
+          fontWeight: FontWeight.w500,
         ),
         titleMedium: TextStyle(
           color: Color.fromARGB(255, 56, 56, 56),
