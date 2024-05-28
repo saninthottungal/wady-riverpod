@@ -33,7 +33,7 @@ class ScreenHome extends ConsumerWidget {
                   topLeft: Radius.elliptical(400, 200),
                 ),
               ),
-              height: size.height * 0.5,
+              height: isForecastVisible ? size.height : size.height * 0.5,
             ),
           ),
           SafeArea(
@@ -78,7 +78,8 @@ class ScreenHome extends ConsumerWidget {
                           ],
                         ),
                       ),
-                      Card(
+                      Card.filled(
+                        color: Colors.white,
                         margin: const EdgeInsets.symmetric(horizontal: 15),
                         child: Column(
                           children: [
