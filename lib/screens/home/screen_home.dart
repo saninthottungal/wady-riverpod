@@ -21,7 +21,9 @@ class ScreenHome extends ConsumerWidget {
     return Scaffold(
       body: Stack(
         children: [
+          //weirdly shaped container in the background(Top)
           const TopCoverContainer(),
+          //weirdly shaped container in the background(Bottom)
           const BottomCoverContainer(),
           SafeArea(
             child: Padding(
@@ -29,6 +31,7 @@ class ScreenHome extends ConsumerWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  //* Row of (City, Date, Theme Toggle, Search Icon)
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -47,7 +50,6 @@ class ScreenHome extends ConsumerWidget {
                             padding: const EdgeInsets.all(17),
                             iconSize: 20,
                             onPressed: () {
-                              //*Navigating to search page
                               Navigator.pushNamed(context, '/search');
                             },
                             icon: const Icon(Icons.search),
@@ -56,13 +58,16 @@ class ScreenHome extends ConsumerWidget {
                       ),
                     ],
                   ),
+                  //*Column of rest of the widgets
                   Column(
                     children: [
+                      //weather degree and image widget
                       const WeatherDegreeWidget(),
                       Card.filled(
                         margin: const EdgeInsets.symmetric(horizontal: 15),
                         child: Column(
                           children: [
+                            // humidity and its value, wind and its value.
                             const WindHumidityWidget(),
                             if (isForecastVisible)
                               const Divider(
@@ -70,7 +75,9 @@ class ScreenHome extends ConsumerWidget {
                                 endIndent: 15,
                               ),
                             if (isForecastVisible)
+                              //*forecast details of 5 days.
                               const ForecastListviewWidget(),
+                            //button for showing/hiding the forecast.
                             const ExpandButtonWidget(),
                           ],
                         ),
