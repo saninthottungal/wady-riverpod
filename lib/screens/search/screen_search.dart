@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class ScreenSearch extends StatelessWidget {
   const ScreenSearch({super.key});
@@ -8,26 +7,40 @@ class ScreenSearch extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.primary,
+      backgroundColor: Theme.of(context).colorScheme.secondary,
       body: SafeArea(
           child: Column(
         children: [
-          Card(
-            margin: const EdgeInsets.all(25),
-            child: TextField(
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                prefixIcon: const Icon(Icons.search),
-                hintText: 'Search a City',
-                suffixIcon: IconButton(
-                  tooltip: 'your location',
-                  onPressed: () {
-                    //TODO current location tracking
-                  },
-                  icon: const Icon(Icons.pin_drop),
+          Row(
+            children: [
+              IconButton(
+                padding: const EdgeInsets.only(left: 5),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: const Icon(Icons.arrow_back),
+              ),
+              Expanded(
+                child: Card(
+                  margin: const EdgeInsets.only(
+                      top: 25, bottom: 25, right: 25, left: 5),
+                  child: TextField(
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      prefixIcon: const Icon(Icons.search),
+                      hintText: 'Search a City',
+                      suffixIcon: IconButton(
+                        tooltip: 'your location',
+                        onPressed: () {
+                          //TODO current location tracking
+                        },
+                        icon: const Icon(Icons.pin_drop),
+                      ),
+                    ),
+                  ),
                 ),
               ),
-            ),
+            ],
           ),
           const Divider(
             color: Colors.black12,
@@ -38,10 +51,11 @@ class ScreenSearch extends StatelessWidget {
             child: ListView.separated(
               itemBuilder: (context, index) {
                 return ListTile(
-                  leading: CircleAvatar(
-                    backgroundColor:
-                        Theme.of(context).colorScheme.inversePrimary,
-                    child: const Icon(
+                  onTap: () {
+                    //TODO set location function
+                  },
+                  leading: const CircleAvatar(
+                    child: Icon(
                       Icons.pin_drop,
                       color: Colors.white70,
                     ),
