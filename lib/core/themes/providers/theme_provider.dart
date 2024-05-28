@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:weather_riverpod/core/common/providers/shared_preferences_provider.dart';
+import 'package:weather_riverpod/common/providers/shared_preferences_provider.dart';
 import 'package:weather_riverpod/core/constants.dart';
 import '../../enums/theme_enum.dart';
 
