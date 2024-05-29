@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:weather_riverpod/common/providers/city_provider.dart';
 import 'package:weather_riverpod/screens/home/widgets/bottom_cover_container.dart';
 import 'package:weather_riverpod/screens/home/widgets/city_text_widget.dart';
 import 'package:weather_riverpod/screens/home/widgets/expand_button_widget.dart';
@@ -17,6 +18,8 @@ class ScreenHome extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isForecastVisible = ref.watch(isForecastCardVisibleProvider);
+    final city = ref.watch(cityProvider);
+    final date = DateTime.now();
 
     return Scaffold(
       body: Stack(
@@ -35,11 +38,14 @@ class ScreenHome extends ConsumerWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Column(
+                      Column(
                         children: [
-                          CityTextWidget(text: 'Lille, France'),
-                          SizedBox(height: 5),
-                          CityTextWidget(text: "25.08.2.2022"),
+                          CityTextWidget(
+                              text:
+                                  '${city.cityName ?? city.name}, ${city.country}'),
+                          const SizedBox(height: 5),
+                          CityTextWidget(
+                              text: "${date.day}.${date.month}.${date.year}"),
                         ],
                       ),
                       Row(
