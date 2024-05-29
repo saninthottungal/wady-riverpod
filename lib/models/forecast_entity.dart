@@ -1,17 +1,17 @@
 import 'package:weather_riverpod/models/forecast_model/forecast.dart';
 
-class DayWeatherModel {
+class ForecastEntity {
   final String? icon;
   final DateTime? date;
   final double? temp;
 
-  DayWeatherModel({
+  ForecastEntity({
     required this.icon,
     required this.date,
     required this.temp,
   });
 
-  factory DayWeatherModel.fromModel(Forecast forecast) {
+  factory ForecastEntity.fromModel(Forecast forecast) {
     final icon = forecast.weather?.first.icon;
     final dateAsUnix = forecast.dt;
 
@@ -21,7 +21,7 @@ class DayWeatherModel {
 
     final temp = forecast.main?.temp;
 
-    return DayWeatherModel(
+    return ForecastEntity(
       icon: icon,
       date: date,
       temp: temp,

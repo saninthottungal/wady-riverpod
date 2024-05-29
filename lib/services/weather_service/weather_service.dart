@@ -27,7 +27,7 @@ class WeatherService {
     return WeatherModel.fromJson(responseAsMap);
   }
 
-  Future<List<DayWeatherModel>> getForecastWeather(CityModel cityModel) async {
+  Future<List<ForecastEntity>> getForecastWeather(CityModel cityModel) async {
     final cityName = cityModel.cityName ?? cityModel.name;
     final countryCode = cityModel.getCountryCode;
 
@@ -43,10 +43,10 @@ class WeatherService {
     final responseAsMap = response.data as Map<String, dynamic>;
     final forecastModels = ForecastModel.fromJson(responseAsMap);
     final dayWeatherModels = forecastModels.forecast
-        ?.map((forecast) => DayWeatherModel.fromModel(forecast))
+        ?.map((forecast) => ForecastEntity.fromModel(forecast))
         .toList();
     if (dayWeatherModels == null) return [];
-    final values = dayWeatherModels.fold<List<DayWeatherModel>>(
+    final values = dayWeatherModels.fold<List<ForecastEntity>>(
       [],
       (previousValue, element) {
         final dates = previousValue.map((e) => e.date?.day).toList();
