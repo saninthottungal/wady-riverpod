@@ -10,3 +10,8 @@ const String weatherImageUrl =
 
 const String forecastApiBaseUrl =
     'https://api.openweathermap.org/data/2.5/forecast';
+
+class HiveKeys {
+  static const boxKey = 'weather';
+  static const weatherKey = 'weather_key';
+}
