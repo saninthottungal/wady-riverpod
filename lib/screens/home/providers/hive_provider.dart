@@ -4,6 +4,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:weather_riverpod/common/providers/db_functions_provider.dart';
 import 'package:weather_riverpod/models/weather_entity/weather_entity.dart';
 
+final localWeatherProvider =
+    AsyncNotifierProvider<LocalWeatherNotifier, WeatherEntity?>(
+        LocalWeatherNotifier.new);
+
 class LocalWeatherNotifier extends AsyncNotifier<WeatherEntity?> {
   @override
   FutureOr<WeatherEntity?> build() {

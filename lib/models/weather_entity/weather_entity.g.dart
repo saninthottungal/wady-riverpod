@@ -19,7 +19,7 @@ class WeatherEntityAdapter extends TypeAdapter<WeatherEntity> {
     return WeatherEntity(
       city: fields[0] as CityEntity,
       temparature: fields[1] as double,
-      humidity: fields[2] as double,
+      humidity: fields[2] as int,
       wind: fields[3] as double,
     );
   }

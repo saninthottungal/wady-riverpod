@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:weather_riverpod/core/constants.dart';
+import 'package:weather_riverpod/screens/home/providers/hive_provider.dart';
 import 'package:weather_riverpod/screens/home/providers/weather_provider.dart';
 
 class WeatherDegreeWidget extends ConsumerWidget {
@@ -9,6 +10,7 @@ class WeatherDegreeWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final weather = ref.watch(weatherProvider);
+    final localWeather = ref.watch(localWeatherProvider);
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20),
       child: weather.when(
@@ -40,7 +42,14 @@ class WeatherDegreeWidget extends ConsumerWidget {
           );
         },
         //!Exception
-        error: (err, stack) => Text(err.toString()),
+        error: (err, stack) => localWeather.when(
+          data: (weather) => Text(
+            "${weather?.temparature ?? 0}°C",
+            style: Theme.of(context).textTheme.displayLarge,
+          ),
+          error: (localError, localStack) => Text(err.toString()),
+          loading: () => const CircularProgressIndicator(),
+        ),
         //!skelton
         loading: () => const CircularProgressIndicator(),
       ),
