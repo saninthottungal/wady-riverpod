@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:weather_riverpod/common/providers/city_provider.dart';
 import 'package:weather_riverpod/screens/search/providers/city_search_provider.dart';
 
 class ScreenSearch extends ConsumerWidget {
@@ -60,7 +61,8 @@ class ScreenSearch extends ConsumerWidget {
                   itemBuilder: (context, index) {
                     return ListTile(
                       onTap: () {
-                        //TODO set location function
+                        ref.read(cityProvider.notifier).state = cities[index];
+                        Navigator.pop(context);
                       },
                       leading: const CircleAvatar(
                         child: Icon(
@@ -70,7 +72,7 @@ class ScreenSearch extends ConsumerWidget {
                       ),
                       title: Text(
                           cities[index].cityName ?? cities[index].name ?? ''),
-                      subtitle: Text(cities[index].country ?? ''),
+                      subtitle: Text(cities[index].countryName ?? ''),
                     );
                   },
                   separatorBuilder: (context, index) {
