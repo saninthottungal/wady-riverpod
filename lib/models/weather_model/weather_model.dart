@@ -8,6 +8,7 @@ part 'weather_model.g.dart';
 
 @JsonSerializable()
 class WeatherModel {
+  @JsonKey(name: 'weather')
   List<Weather>? weather;
   Main? main;
   Wind? wind;
