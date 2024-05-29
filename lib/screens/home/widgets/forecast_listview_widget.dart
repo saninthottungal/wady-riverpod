@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:weather_riverpod/core/constants.dart';
 import 'package:weather_riverpod/screens/home/providers/forecast_provider.dart';
 
 class ForecastListviewWidget extends ConsumerWidget {
@@ -19,11 +20,20 @@ class ForecastListviewWidget extends ConsumerWidget {
               //!exception handling
               final date = forecast[index].date!;
               final day = formatDate(date);
+              final imageCode = forecast[index].icon ?? '';
+              final imageUrl =
+                  weatherImageUrl.replaceAll('imageCode', imageCode);
+              final temp = forecast[index].temp?.toStringAsFixed(1);
 
               return ListTile(
-                leading: const Icon(Icons.sunny),
+                leading: CircleAvatar(
+                  child: Image.network(imageUrl),
+                ),
                 title: Text(day),
-                trailing: Text('${forecast[index].temp?.toStringAsFixed(1)}°C'),
+                trailing: Text(
+                  '$temp°C',
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
               );
             },
             itemCount: 5,
