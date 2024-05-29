@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import 'package:weather_riverpod/common/providers/city_provider.dart';
 import 'package:weather_riverpod/screens/search/providers/city_search_provider.dart';
 
@@ -87,7 +88,33 @@ class ScreenSearch extends ConsumerWidget {
                 );
               },
               error: (err, stack) => const Text("Couldn't load"),
-              loading: () => const CircularProgressIndicator(),
+              loading: () {
+                return Skeletonizer(
+                  child: ListView.separated(
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        leading: const Skeleton.keep(
+                          child: CircleAvatar(
+                            child: Icon(
+                              Icons.pin_drop,
+                              color: Colors.white70,
+                            ),
+                          ),
+                        ),
+                        title: Text(BoneMock.city),
+                        subtitle: Text(BoneMock.country),
+                      );
+                    },
+                    separatorBuilder: (context, index) {
+                      return Divider(
+                        color: Colors.black12,
+                        indent: size.width * 0.2,
+                      );
+                    },
+                    itemCount: 10,
+                  ),
+                );
+              },
             ),
           ),
         ],

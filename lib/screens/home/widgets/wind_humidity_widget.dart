@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import 'package:weather_riverpod/screens/home/providers/hive_provider.dart';
 import 'package:weather_riverpod/screens/home/providers/weather_provider.dart';
 import 'package:weather_riverpod/screens/home/widgets/custom_row_widget.dart';
@@ -40,7 +41,17 @@ class WindHumidityWidget extends ConsumerWidget {
           error: (localErro, localStack) => Text(err.toString()),
           loading: () => const CircularProgressIndicator(),
         ),
-        loading: () => const CircularProgressIndicator(),
+        loading: () {
+          return const Skeletonizer(
+            child: Column(
+              children: [
+                CustomRowWidget(label: 'Humidity', trailing: '152%'),
+                SizedBox(height: 15),
+                CustomRowWidget(label: 'wind', trailing: '10m/s'),
+              ],
+            ),
+          );
+        },
       ),
     );
   }

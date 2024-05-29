@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import 'package:weather_riverpod/common/providers/city_provider.dart';
 import 'package:weather_riverpod/screens/home/providers/weather_provider.dart';
 import 'package:weather_riverpod/screens/home/widgets/bottom_cover_container.dart';
@@ -52,7 +53,10 @@ class ScreenHome extends ConsumerWidget {
                               ref.invalidate(cityProvider);
                               return Text(err.toString());
                             },
-                            loading: () => const CircularProgressIndicator(),
+                            loading: () {
+                              return const Skeletonizer(
+                                  child: CityTextWidget(text: 'mock,mock'));
+                            },
                           ),
                           const SizedBox(height: 5),
                           CityTextWidget(

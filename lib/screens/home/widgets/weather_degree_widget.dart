@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import 'package:weather_riverpod/core/constants.dart';
 import 'package:weather_riverpod/screens/home/providers/hive_provider.dart';
 import 'package:weather_riverpod/screens/home/providers/weather_provider.dart';
@@ -9,6 +10,7 @@ class WeatherDegreeWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final size = MediaQuery.of(context).size;
     final weather = ref.watch(weatherProvider);
     final localWeather = ref.watch(localWeatherProvider);
     return Padding(
@@ -51,7 +53,22 @@ class WeatherDegreeWidget extends ConsumerWidget {
           loading: () => const CircularProgressIndicator(),
         ),
         //!skelton
-        loading: () => const CircularProgressIndicator(),
+        loading: () {
+          return Skeletonizer(
+              child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CircleAvatar(
+                radius: size.width * 0.15,
+              ),
+              const SizedBox(width: 10),
+              Text(
+                "310c",
+                style: Theme.of(context).textTheme.displayLarge,
+              ),
+            ],
+          ));
+        },
       ),
     );
   }
