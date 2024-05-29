@@ -11,7 +11,7 @@ import 'package:weather_riverpod/screens/home/widgets/top_cover_container.dart';
 import 'package:weather_riverpod/screens/home/widgets/weather_degree_widget.dart';
 import 'package:weather_riverpod/screens/home/widgets/wind_humidity_widget.dart';
 
-import 'providers/forecast_provider.dart';
+import 'providers/forecast_visibilty_provider.dart';
 
 class ScreenHome extends ConsumerWidget {
   const ScreenHome({super.key});

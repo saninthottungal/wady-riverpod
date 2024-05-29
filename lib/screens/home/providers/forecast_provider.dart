@@ -5,6 +5,10 @@ import 'package:weather_riverpod/common/providers/city_provider.dart';
 import 'package:weather_riverpod/common/providers/weather_service_provider.dart';
 import 'package:weather_riverpod/models/forecast_entity.dart';
 
+final forecastProvider =
+    AsyncNotifierProvider<ForecastNotififer, List<ForecastEntity>>(
+        ForecastNotififer.new);
+
 class ForecastNotififer extends AsyncNotifier<List<ForecastEntity>> {
   @override
   FutureOr<List<ForecastEntity>> build() async {

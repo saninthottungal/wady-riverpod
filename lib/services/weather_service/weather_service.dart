@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:weather_riverpod/core/.keys.dart';
 import 'package:weather_riverpod/core/constants.dart';
 import 'package:weather_riverpod/models/city_model.dart';
-import 'package:weather_riverpod/models/day_weather_model.dart';
+import 'package:weather_riverpod/models/forecast_entity.dart';
 import 'package:weather_riverpod/models/forecast_model/forecast_model.dart';
 import 'package:weather_riverpod/models/weather_model/weather_model.dart';
 

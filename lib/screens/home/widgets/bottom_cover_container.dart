@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../providers/forecast_provider.dart';
+import '../providers/forecast_visibilty_provider.dart';
 
 class BottomCoverContainer extends ConsumerWidget {
   const BottomCoverContainer({super.key});
