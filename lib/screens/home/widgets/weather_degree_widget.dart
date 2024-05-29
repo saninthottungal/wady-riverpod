@@ -20,9 +20,13 @@ class WeatherDegreeWidget extends ConsumerWidget {
           return Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.network(
-                imageUrl,
-                height: 120,
+              Card(
+                color: Theme.of(context).colorScheme.inversePrimary,
+                shape: const CircleBorder(),
+                child: Image.network(
+                  imageUrl,
+                  height: 120,
+                ),
               ),
               const SizedBox(width: 10),
               Text(

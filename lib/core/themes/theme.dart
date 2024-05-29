@@ -40,7 +40,7 @@ class WeatherThemes {
     colorScheme: const ColorScheme.dark(
       primary: Color.fromARGB(255, 106, 71, 46),
       secondary: Color.fromARGB(255, 33, 22, 14),
-      inversePrimary: Color.fromARGB(255, 173, 147, 128),
+      inversePrimary: Color.fromARGB(255, 92, 73, 60),
     ),
     //card theme
     cardTheme: const CardTheme(
