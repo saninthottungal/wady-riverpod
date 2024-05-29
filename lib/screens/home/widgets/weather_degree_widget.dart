@@ -15,7 +15,7 @@ class WeatherDegreeWidget extends ConsumerWidget {
         data: (weather) {
           final imageUrl = weatherImageUrl.replaceAll(
               'imageCode', '${weather.weather?.first.icon}');
-          print(imageUrl);
+
           final temparature = weather.main?.temp?.toStringAsFixed(1);
           return Row(
             mainAxisAlignment: MainAxisAlignment.center,

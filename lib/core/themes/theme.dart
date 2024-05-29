@@ -49,7 +49,7 @@ class WeatherThemes {
     //text theme
     textTheme: const TextTheme(
       displayLarge: TextStyle(
-        color: Color.fromARGB(255, 147, 147, 200),
+        color: Color.fromARGB(255, 213, 213, 225),
       ),
       titleLarge: TextStyle(
         color: Color.fromARGB(255, 200, 200, 200),
