@@ -72,7 +72,7 @@ class ScreenSearch extends ConsumerWidget {
                       ),
                       title: Text(
                           cities[index].cityName ?? cities[index].name ?? ''),
-                      subtitle: Text(cities[index].countryName ?? ''),
+                      subtitle: Text(cities[index].getCountryName ?? ''),
                     );
                   },
                   separatorBuilder: (context, index) {

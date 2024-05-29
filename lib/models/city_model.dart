@@ -21,7 +21,8 @@ class CityModel {
     return _country.length < 10 ? _country : _countryCode;
   }
 
-  String? get countryName => _country;
+  String? get getCountryName => _country;
+  String? get getCountryCode => _countryCode;
 
   factory CityModel.fromJson(Map<String, dynamic> map) {
     return CityModel(

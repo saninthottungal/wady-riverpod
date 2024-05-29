@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:weather_riverpod/common/providers/city_provider.dart';
+import 'package:weather_riverpod/screens/home/providers/weather_provider.dart';
 import 'package:weather_riverpod/screens/home/widgets/bottom_cover_container.dart';
 import 'package:weather_riverpod/screens/home/widgets/city_text_widget.dart';
 import 'package:weather_riverpod/screens/home/widgets/expand_button_widget.dart';
@@ -20,6 +21,7 @@ class ScreenHome extends ConsumerWidget {
     final isForecastVisible = ref.watch(isForecastCardVisibleProvider);
     final city = ref.watch(cityProvider);
     final date = DateTime.now();
+    ref.watch(weatherProvider);
 
     return Scaffold(
       body: Stack(
