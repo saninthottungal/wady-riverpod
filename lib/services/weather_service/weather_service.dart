@@ -17,11 +17,17 @@ class WeatherService {
   Future<WeatherModel> getCurrentWeather(CityModel cityModel) async {
     final cityName = cityModel.cityName ?? cityModel.name;
     final countryCode = cityModel.getCountryCode;
-    final baseUrl =
-        weatherBaseUrl.replaceAll('placesValues', '$cityName,$countryCode');
-    const apiUrl = weatherApiurl + WeatherKeys.weatherApiKey;
 
-    final response = await dio.get(baseUrl + apiUrl);
+    final Map<String, dynamic> queryParameters = {
+      'q': '$cityName,$countryCode',
+      'units': 'metric',
+      'appid': WeatherKeys.weatherApiKey,
+    };
+
+    final response = await dio.get(
+      weatherBaseUrl,
+      queryParameters: queryParameters,
+    );
     final responseAsMap = response.data as Map<String, dynamic>;
 
     return WeatherModel.fromJson(responseAsMap);
