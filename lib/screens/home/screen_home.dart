@@ -42,9 +42,18 @@ class ScreenHome extends ConsumerWidget {
                     children: [
                       Column(
                         children: [
-                          CityTextWidget(
-                              text:
-                                  '${city.cityName ?? city.name}, ${city.country}'),
+                          city.when(
+                            data: (city) {
+                              return CityTextWidget(
+                                  text:
+                                      '${city.cityName ?? city.name}, ${city.country}');
+                            },
+                            error: (err, stackTrace) {
+                              ref.invalidate(cityProvider);
+                              return Text(err.toString());
+                            },
+                            loading: () => const CircularProgressIndicator(),
+                          ),
                           const SizedBox(height: 5),
                           CityTextWidget(
                               text: "${date.day}.${date.month}.${date.year}"),

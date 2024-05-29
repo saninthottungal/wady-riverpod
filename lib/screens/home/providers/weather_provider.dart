@@ -15,7 +15,7 @@ class WeatherNotifier extends AsyncNotifier<WeatherModel> {
   FutureOr<WeatherModel> build() async {
     final weatherService = ref.watch(weatherServiceProvider);
     final dbFunctions = ref.watch(dbFunctionsProvider);
-    final city = ref.watch(cityProvider);
+    final city = await ref.watch(cityProvider.future);
     final data = await weatherService.getCurrentWeather(city);
     await dbFunctions.addLocalWeather(WeatherEntity.fromModel(data, city));
 

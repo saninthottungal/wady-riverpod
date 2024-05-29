@@ -61,7 +61,9 @@ class ScreenSearch extends ConsumerWidget {
                   itemBuilder: (context, index) {
                     return ListTile(
                       onTap: () {
-                        ref.read(cityProvider.notifier).state = cities[index];
+                        ref
+                            .read(cityProvider.notifier)
+                            .changeCity(cities[index]);
                         Navigator.pop(context);
                       },
                       leading: const CircleAvatar(

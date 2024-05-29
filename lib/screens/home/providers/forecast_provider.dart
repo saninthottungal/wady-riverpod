@@ -13,7 +13,7 @@ class ForecastNotififer extends AsyncNotifier<List<ForecastEntity>> {
   @override
   FutureOr<List<ForecastEntity>> build() async {
     final weatherService = ref.watch(weatherServiceProvider);
-    final cityModel = ref.watch(cityProvider);
+    final cityModel = await ref.watch(cityProvider.future);
     return weatherService.getForecastWeather(cityModel);
   }
 }
