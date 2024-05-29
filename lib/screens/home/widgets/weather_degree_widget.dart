@@ -26,6 +26,9 @@ class WeatherDegreeWidget extends ConsumerWidget {
                 child: Image.network(
                   imageUrl,
                   height: 120,
+                  errorBuilder: (context, error, stackTrace) {
+                    return const SizedBox();
+                  },
                 ),
               ),
               const SizedBox(width: 10),
