@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:weather_riverpod/common/providers/dio_provider.dart';
 import 'package:weather_riverpod/models/city_model.dart';
@@ -23,6 +22,7 @@ final cityListProvider =
 //notifer class
 
 class CityListNotifier extends AsyncNotifier<List<CityModel>> {
+  Timer? _timer;
   @override
   Future<List<CityModel>> build() async {
     return [];
@@ -30,7 +30,14 @@ class CityListNotifier extends AsyncNotifier<List<CityModel>> {
 
   Future<void> getCities(String value) async {
     final instace = ref.read(citySearchInstanceProvider);
-    final cities = await instace.getCities(value);
-    state = AsyncData(cities);
+    if (value.isEmpty) return;
+    if (_timer != null) {
+      _timer?.cancel();
+    }
+    _timer = Timer(const Duration(milliseconds: 500), () async {
+      final cities = await instace.getCities(value);
+
+      state = AsyncData(cities);
+    });
   }
 }
