@@ -44,7 +44,7 @@ class WeatherDegreeWidget extends ConsumerWidget {
         //!Exception
         error: (err, stack) => localWeather.when(
           data: (weather) => Text(
-            "${weather?.temparature ?? 0}°C",
+            "${weather?.temparature.toStringAsFixed(1) ?? 0}°C",
             style: Theme.of(context).textTheme.displayLarge,
           ),
           error: (localError, localStack) => Text(err.toString()),

@@ -33,8 +33,7 @@ class WindHumidityWidget extends ConsumerWidget {
                     label: 'Humidity', trailing: '${weather?.humidity ?? 10}%'),
                 const SizedBox(height: 15),
                 CustomRowWidget(
-                    label: 'wind',
-                    trailing: '${weather?.wind.toStringAsFixed(1)} m/s'),
+                    label: 'wind', trailing: '${weather?.wind} m/s'),
               ],
             );
           },
