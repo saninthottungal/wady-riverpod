@@ -28,6 +28,8 @@ class CityListNotifier extends AsyncNotifier<List<CityModel>> {
     return [];
   }
 
+  //! Handle exceptions and empty values
+
   Future<void> getCities(String value) async {
     final instace = ref.read(citySearchInstanceProvider);
     if (value.isEmpty) return;
