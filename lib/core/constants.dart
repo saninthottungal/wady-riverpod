@@ -9,3 +9,6 @@ const String weatherApiurl = '&appid=';
 
 const String weatherImageUrl =
     'https://openweathermap.org/img/wn/imageCode@2x.png';
+
+const String forecastApiBaseUrl =
+    'https://api.openweathermap.org/data/2.5/forecast';

@@ -13,7 +13,8 @@ class WeatherNotifier extends AsyncNotifier<WeatherModel> {
   FutureOr<WeatherModel> build() async {
     final weatherService = ref.watch(weatherServiceProvider);
     final city = ref.watch(cityProvider);
-    final data = await weatherService.getWeather(city);
+    final data = await weatherService.getCurrentWeather(city);
+    await weatherService.getForecastWeather(city);
     return data;
   }
 }

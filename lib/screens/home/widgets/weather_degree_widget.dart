@@ -36,7 +36,9 @@ class WeatherDegreeWidget extends ConsumerWidget {
             ],
           );
         },
+        //!Exception
         error: (err, stack) => Text(err.toString()),
+        //!skelton
         loading: () => const CircularProgressIndicator(),
       ),
     );
