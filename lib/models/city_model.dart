@@ -1,10 +1,18 @@
+import 'package:hive_flutter/adapters.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:uuid/uuid.dart';
 
-class CityModel {
+@HiveType(typeId: 2)
+class CityModel extends HiveObject {
+  @HiveField(0)
   final String id;
+  @HiveField(1)
   final String? name;
+  @HiveField(2)
   final String? cityName;
+  @HiveField(3)
   final String? _country;
+  @HiveField(4)
   final String? _countryCode;
 
   CityModel({
