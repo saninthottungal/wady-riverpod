@@ -9,6 +9,8 @@ class WeatherService {
 
   WeatherService({required this.dio});
 
+  //! handle exceptions
+
   Future<WeatherModel> getWeather(CityModel cityModel) async {
     final citynName = cityModel.cityName ?? cityModel.name;
     final countryCode = cityModel.getCountryCode;
@@ -18,7 +20,7 @@ class WeatherService {
 
     final response = await dio.get(baseUrl + apiUrl);
     final responseAsMap = response.data as Map<String, dynamic>;
-    print(responseAsMap);
+
     return WeatherModel.fromJson(responseAsMap);
   }
 }
