@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:weather_riverpod/core/.keys.dart';
 import 'package:weather_riverpod/core/constants.dart';
 import 'package:weather_riverpod/models/city_model.dart';
 
@@ -11,17 +10,17 @@ class CitySearch {
   //! Exception Handling Pending
 
   Future<List<CityModel>> getCities(String value) async {
-    const apiKey = WeatherKeys.citySearchApiKey;
-    final queryParameters = {'apikey': apiKey, 'q': value};
-    final response =
-        await dio.get(citySearchBaseUrl, queryParameters: queryParameters);
+    final response = await dio.get(citySearchBaseUrl + value);
     if (response.statusCode == 200) {
-      final responseAsList = response as List<Map<String, dynamic>>;
+      if (response.data == null) return [];
+      final responseAsList = response.data as List;
+      final cities = responseAsList.map((dynamicMap) {
+        final map = dynamicMap as Map<String, dynamic>;
+        return CityModel.fromJson(map);
+      }).toList();
 
-      final cities =
-          responseAsList.map((map) => CityModel.fromJson(map)).toList();
       return cities;
-    }
+    } else {}
     return [];
   }
 }
