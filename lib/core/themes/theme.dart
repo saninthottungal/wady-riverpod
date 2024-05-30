@@ -38,10 +38,11 @@ class WeatherThemes {
     brightness: Brightness.dark,
     //color Scheme
     colorScheme: const ColorScheme.dark(
-      primary: Color.fromARGB(255, 106, 71, 46),
+      primary: Color.fromARGB(255, 146, 97, 63),
       secondary: Color.fromARGB(255, 33, 22, 14),
-      inversePrimary: Color.fromARGB(255, 92, 73, 60),
+      inversePrimary: Color.fromARGB(255, 137, 100, 76),
     ),
+
     //card theme
     cardTheme: const CardTheme(
       elevation: 3,
