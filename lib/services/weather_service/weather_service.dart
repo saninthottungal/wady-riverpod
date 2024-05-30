@@ -11,9 +11,6 @@ class WeatherService {
 
   WeatherService({required this.dio});
 
-  //! handle exceptions
-  //? change to query parameters
-
   Future<WeatherModel> getCurrentWeather(CityModel cityModel) async {
     final cityName = cityModel.cityName ?? cityModel.name;
     final countryCode = cityModel.getCountryCode;
@@ -23,11 +20,16 @@ class WeatherService {
       'units': 'metric',
       'appid': WeatherKeys.weatherApiKey,
     };
+    late Response response;
+    try {
+      response = await dio.get(
+        weatherBaseUrl,
+        queryParameters: queryParameters,
+      );
+    } on DioException {
+      throw Exception('Network Error');
+    }
 
-    final response = await dio.get(
-      weatherBaseUrl,
-      queryParameters: queryParameters,
-    );
     final responseAsMap = response.data as Map<String, dynamic>;
 
     return WeatherModel.fromJson(responseAsMap);
@@ -42,10 +44,16 @@ class WeatherService {
       'units': 'metric',
       'appid': WeatherKeys.weatherApiKey,
     };
-    final response = await dio.get(
-      forecastApiBaseUrl,
-      queryParameters: queryParameters,
-    );
+
+    late Response response;
+    try {
+      response = await dio.get(
+        forecastApiBaseUrl,
+        queryParameters: queryParameters,
+      );
+    } on DioException {
+      throw Exception('network error');
+    }
     final responseAsMap = response.data as Map<String, dynamic>;
     final forecastModels = ForecastModel.fromJson(responseAsMap);
     final dayWeatherModels = forecastModels.forecast

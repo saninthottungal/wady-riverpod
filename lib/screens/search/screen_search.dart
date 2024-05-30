@@ -33,17 +33,10 @@ class ScreenSearch extends ConsumerWidget {
                     onChanged: (value) {
                       ref.read(cityListProvider.notifier).getCities(value);
                     },
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       border: InputBorder.none,
-                      prefixIcon: const Icon(Icons.search),
+                      prefixIcon: Icon(Icons.search),
                       hintText: 'Search a City',
-                      suffixIcon: IconButton(
-                        tooltip: 'your location',
-                        onPressed: () {
-                          //TODO current location tracking
-                        },
-                        icon: const Icon(Icons.pin_drop),
-                      ),
                     ),
                   ),
                 ),
@@ -87,7 +80,7 @@ class ScreenSearch extends ConsumerWidget {
                   itemCount: cities.length,
                 );
               },
-              error: (err, stack) => const Text("Couldn't load"),
+              error: (err, stack) => Text(err.toString()),
               loading: () {
                 return Skeletonizer(
                   child: ListView.separated(

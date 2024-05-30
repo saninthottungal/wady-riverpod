@@ -32,15 +32,21 @@ class CityListNotifier extends AsyncNotifier<List<CityModel>> {
 
   Future<void> getCities(String value) async {
     final instace = ref.read(citySearchInstanceProvider);
-    if (value.isEmpty) return;
+    if (value.isEmpty) {
+      state = const AsyncData([]);
+      return;
+    }
     state = const AsyncLoading();
     if (_timer != null) {
       _timer?.cancel();
     }
     _timer = Timer(const Duration(milliseconds: 500), () async {
-      final cities = await instace.getCities(value);
-
-      state = AsyncData(cities);
+      try {
+        final cities = await instace.getCities(value);
+        state = AsyncData(cities);
+      } on Exception catch (e) {
+        state = AsyncError(e, StackTrace.current);
+      }
     });
   }
 }

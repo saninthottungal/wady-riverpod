@@ -6,11 +6,13 @@ class CitySearch {
   final Dio dio;
 
   CitySearch({required this.dio});
-
-  //! Exception Handling Pending
-
   Future<List<CityModel>> getCities(String value) async {
-    final response = await dio.get(citySearchBaseUrl + value);
+    Response response;
+    try {
+      response = await dio.get(citySearchBaseUrl + value);
+    } on DioException {
+      throw Exception('Network Error!');
+    }
     if (response.statusCode == 200) {
       if (response.data == null) return [];
       final responseAsList = response.data as List;
