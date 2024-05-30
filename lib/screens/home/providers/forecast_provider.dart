@@ -12,6 +12,7 @@ final forecastProvider =
 class ForecastNotififer extends AsyncNotifier<List<ForecastEntity>> {
   @override
   FutureOr<List<ForecastEntity>> build() async {
+    state = const AsyncLoading();
     final weatherService = ref.watch(weatherServiceProvider);
     final cityModel = await ref.watch(cityProvider.future);
     return weatherService.getForecastWeather(cityModel);

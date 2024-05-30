@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:weather_riverpod/common/providers/city_provider.dart';
+import 'package:weather_riverpod/screens/home/providers/forecast_provider.dart';
 import 'package:weather_riverpod/screens/home/providers/weather_provider.dart';
 import 'package:weather_riverpod/screens/home/widgets/bottom_cover_container.dart';
 import 'package:weather_riverpod/screens/home/widgets/city_text_widget.dart';
@@ -64,6 +65,13 @@ class ScreenHome extends ConsumerWidget {
                       ),
                       Row(
                         children: [
+                          IconButton(
+                            icon: const Icon(Icons.refresh),
+                            onPressed: () {
+                              ref.invalidate(weatherProvider);
+                              ref.invalidate(forecastProvider);
+                            },
+                          ),
                           const ThemeToggleWidget(),
                           const SizedBox(width: 10),
                           IconButton.filled(
