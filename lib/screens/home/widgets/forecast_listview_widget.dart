@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import 'package:weather_riverpod/core/constants.dart';
 import 'package:weather_riverpod/screens/home/providers/forecast_provider.dart';
 
@@ -40,7 +41,27 @@ class ForecastListviewWidget extends ConsumerWidget {
           );
         },
         error: (err, stack) => Text(err.toString()),
-        loading: () => const CircularProgressIndicator(),
+        loading: () {
+          return Skeletonizer(
+            child: ListView.builder(
+              itemBuilder: (context, index) {
+                //!exception handling
+
+                return ListTile(
+                  leading: const CircleAvatar(
+                    radius: 5,
+                  ),
+                  title: Text(BoneMock.city),
+                  trailing: Text(
+                    'tempC',
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                );
+              },
+              itemCount: 5,
+            ),
+          );
+        },
       ),
     );
   }

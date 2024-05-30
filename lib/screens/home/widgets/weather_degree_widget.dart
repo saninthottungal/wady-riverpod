@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:weather_riverpod/core/constants.dart';
@@ -29,9 +30,16 @@ class WeatherDegreeWidget extends ConsumerWidget {
                 shape: const CircleBorder(),
                 child: Image.network(
                   imageUrl,
-                  height: 120,
+                  height: size.width * 0.31,
                   errorBuilder: (context, error, stackTrace) {
-                    return const SizedBox();
+                    return Container(
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.inversePrimary,
+                        shape: BoxShape.circle,
+                      ),
+                      height: size.width * 0.31,
+                      width: size.width * 0.31,
+                    );
                   },
                 ),
               ),
@@ -58,12 +66,17 @@ class WeatherDegreeWidget extends ConsumerWidget {
               child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              CircleAvatar(
-                radius: size.width * 0.15,
+              Container(
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.inversePrimary,
+                  shape: BoxShape.circle,
+                ),
+                height: size.width * 0.31,
+                width: size.width * 0.31,
               ),
               const SizedBox(width: 10),
               Text(
-                "310c",
+                BoneMock.time,
                 style: Theme.of(context).textTheme.displayLarge,
               ),
             ],
