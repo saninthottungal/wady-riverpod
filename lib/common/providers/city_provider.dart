@@ -4,16 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:weather_riverpod/models/city_model.dart';
 import 'package:weather_riverpod/screens/home/providers/hive_provider.dart';
 
-// final cityProvider = StateProvider<CityModel>(
-//   //! user location
-//   (ref) => CityModel(
-//     name: 'Kochi',
-//     cityName: 'Kochi',
-//     country: 'India',
-//     countryCode: 'COK',
-//   ),
-// );
-
 final cityProvider =
     AsyncNotifierProvider<CityNotifier, CityModel>(CityNotifier.new);
 

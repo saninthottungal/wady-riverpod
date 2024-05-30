@@ -1,7 +1,9 @@
 import 'dart:async';
 
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:weather_riverpod/common/providers/city_provider.dart';
+import 'package:weather_riverpod/common/providers/connectivity_provider.dart';
 import 'package:weather_riverpod/common/providers/db_functions_provider.dart';
 import 'package:weather_riverpod/common/providers/weather_service_provider.dart';
 import 'package:weather_riverpod/models/weather_entity/weather_entity.dart';
@@ -13,6 +15,13 @@ final weatherProvider =
 class WeatherNotifier extends AsyncNotifier<WeatherModel> {
   @override
   FutureOr<WeatherModel> build() async {
+    // final connectivity = ref.watch(connectivityListProvider);
+    // connectivity.whenData((value) {
+    //   if (value.contains(ConnectivityResult.mobile) ||
+    //       value.contains(ConnectivityResult.wifi)) {
+    //     ref.invalidateSelf();
+    //   }
+    // });
     final weatherService = ref.watch(weatherServiceProvider);
     final dbFunctions = ref.watch(dbFunctionsProvider);
     final city = await ref.watch(cityProvider.future);
